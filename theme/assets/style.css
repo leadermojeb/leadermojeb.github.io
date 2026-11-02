@@ -117,37 +117,36 @@ img { max-width: 100%; height: auto; }
 :root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
-/* ── الواجهة ── */
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(2rem, 6vw, 5rem);
-  padding-block: clamp(3rem, 9vw, 6.5rem);
+/* ── الواجهة ──
+   M2M كبيرة بخط محيطي، تمر بالعرض خلف العنوان العربي */
+.hero { padding-block: clamp(2.5rem, 7vw, 5rem) clamp(3rem, 8vw, 5.5rem); }
+.hero-head { position: relative; padding-block: clamp(1rem, 3vw, 2rem) clamp(2.4rem, 4vw, 2.75rem); margin-bottom: clamp(1.5rem, 4vw, 2.5rem); }
+.hero-mark {
+  display: block; direction: ltr; text-align: left;
+  font-size: clamp(7.5rem, 27vw, 19.5rem); font-weight: 700; line-height: .9; letter-spacing: -.03em;
+  color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--ink) 28%, transparent);
+  user-select: none; pointer-events: none;
 }
-.hero-title { font-size: clamp(2.6rem, 6.5vw, 4.6rem); text-wrap: balance; line-height: 1.15; margin-bottom: .6em; }
+.hero-mark b { font-weight: inherit; -webkit-text-stroke-color: var(--accent); }
+.hero-title {
+  position: absolute; inset-inline-start: 0; top: 50%; transform: translateY(-50%);
+  margin: 0; z-index: 1; max-width: 9.5em;
+  font-size: clamp(2.6rem, 7vw, 5.25rem); line-height: 1.15; text-wrap: balance;
+}
 .hero-tagline {
-  display: inline-flex; align-items: baseline; gap: .6rem;
-  margin: -.2em 0 1.6em; color: var(--ink-2); font-size: 1.05rem; font-weight: 500;
-  unicode-bidi: isolate;
+  position: absolute; left: .4em; bottom: 0; margin: 0;
+  color: var(--ink-2); font-size: clamp(.95rem, 1.6vw, 1.1rem); font-weight: 500; letter-spacing: .02em;
 }
-.hero-tagline span { color: var(--accent); font-weight: 700; letter-spacing: .04em; }
-.hero-who { font-size: 1.2rem; margin-bottom: 1.4em; color: var(--ink); }
+.hero-who { font-size: 1.2rem; margin-bottom: 1.2em; color: var(--ink); }
 .hero-who strong { font-weight: 700; font-size: 1.5em; line-height: 1.3; }
-.lead { color: var(--ink-2); font-size: 1.15rem; max-width: 34em; }
-
-.corridor { margin: 0; justify-self: center; width: min(100%, 300px); color: var(--ink); }
-.corridor svg { display: block; width: 100%; height: auto; overflow: visible; }
-.corridor .frame, .corridor .rails line { fill: none; stroke: currentColor; stroke-width: 1.4; vector-effect: non-scaling-stroke; }
-.corridor .rails line { stroke-opacity: .35; }
-.corridor .frame { opacity: calc(1 - var(--i) * .11); }
-.corridor .end { fill: var(--accent); }
+.hero-text { max-width: 40em; }
+.lead { color: var(--ink-2); font-size: 1.15rem; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .corridor .frame { animation: frame-in .7s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i) * 110ms); }
-  .corridor .end { animation: glow 1s ease-out .75s both; }
-  @keyframes frame-in { from { opacity: 0; transform: scale(1.04); transform-origin: 50% 50%; } }
-  @keyframes glow { from { opacity: 0; } }
+  .hero-mark { animation: mark-in 1.1s cubic-bezier(.2, .7, .2, 1) both; }
+  .hero-title { animation: title-in .8s ease-out .35s both; }
+  @keyframes mark-in { from { opacity: 0; transform: translateX(-8%); } }
+  @keyframes title-in { from { opacity: 0; } }
 }
 
 /* ── المجلدان ── */
@@ -302,8 +301,6 @@ img { max-width: 100%; height: auto; }
   .brand { gap: .5rem; }
   .brand span { font-size: 1rem; }
   .theme-toggle { width: 34px; height: 34px; }
-  .hero { grid-template-columns: 1fr; padding-block: 2.5rem 3rem; }
-  .corridor { order: -1; justify-self: start; width: 120px; }
   .collections { grid-template-columns: 1fr; }
   .collection:first-child { padding-inline-end: 0; }
   .collection + .collection { padding-inline-start: 0; border-inline-start: 0; }
