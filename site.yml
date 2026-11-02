@@ -10,7 +10,7 @@ base: "/"
 description: "ملخصات بالعربي لمفاهيم تقنية وسيبرانية، وقراءات في البحوث العلمية."
 
 author:
-  name: "اسمك"
+  name: "معجب العتيبي"
   role: "محلل أمن سيبراني في مركز عمليات الأمن (SOC)"
 
 # تعريف عن نفسك
@@ -33,13 +33,9 @@ contribute:
 # طرق التواصل — احذف أي سطر ما تحتاجه
 contacts:
   - label: "البريد"
-    url: "mailto:you@example.com"
+    url: "mailto:majebhome@gmail.com"
   - label: "LinkedIn"
-    url: "https://www.linkedin.com/in/USERNAME"
-  - label: "X"
-    url: "https://x.com/USERNAME"
-  - label: "GitHub"
-    url: "https://github.com/leadermojeb"
+    url: "https://www.linkedin.com/in/mojeb"
 
 # المجلدان
 sections:
