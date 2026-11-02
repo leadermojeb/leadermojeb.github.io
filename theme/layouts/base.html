@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{{ site.title }}{% endblock %}</title>
+  <title>{% block title %}{{ site.title }}{% if site.short_title %} | {{ site.short_title }}{% endif %}{% endblock %}</title>
   <meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
   <meta name="theme-color" content="#16243A">
   <script>
@@ -31,7 +31,7 @@
           <rect x="6.5" y="6.5" width="11" height="11" />
           <rect class="end" x="10" y="10" width="4" height="4" />
         </svg>
-        <span>{{ site.title }}</span>
+        <span>{{ site.short_title or site.title }}</span>
       </a>
       <div class="header-tools">
         <nav class="site-nav" aria-label="الأقسام">
