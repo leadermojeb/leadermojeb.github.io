@@ -19,7 +19,39 @@
   </header>
 
   <div class="prose">
+    {% if post.paper %}
+    <table class="paper-card">
+      <tbody>
+        {% if post.paper.title %}<tr><th>العنوان الأصلي</th><td dir="auto">{{ post.paper.title }}</td></tr>{% endif %}
+        {% if post.paper.authors %}<tr><th>المؤلفون</th><td dir="auto">{{ post.paper.authors }}</td></tr>{% endif %}
+        {% if post.paper.year or post.paper.venue %}<tr><th>النشر</th><td dir="auto">{{ post.paper.venue or "" }}{% if post.paper.venue and post.paper.year %}، {% endif %}{{ post.paper.year or "" }}</td></tr>{% endif %}
+        {% if post.paper.link %}<tr><th>الرابط</th><td><a href="{{ post.paper.link }}" rel="noopener">اقرأ البحث الأصلي</a></td></tr>{% endif %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    {% if post.summary %}
+    <div class="admonition abstract">
+      <p class="admonition-title">الخلاصة</p>
+      {{ post.summary|safe }}
+    </div>
+    {% endif %}
+
     {{ post.html|safe }}
+
+    {% if post.questions %}
+    <h2 id="quiz">اختبر نفسك</h2>
+    {% for q in post.questions %}
+    <details class="question">
+      <summary>{{ q.question }}</summary>
+      {{ q.answer|safe }}
+    </details>
+    {% endfor %}
+    {% endif %}
+
+    {% if post.section == 'research' %}
+    <p class="research-note">هذا ملخص بكلماتي لأغراض تعليمية. للتفاصيل الكاملة ارجع إلى البحث الأصلي.</p>
+    {% endif %}
   </div>
 
   {% if post.tags %}

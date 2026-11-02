@@ -239,6 +239,12 @@ img { max-width: 100%; height: auto; }
 .prose .admonition > * + * { margin-top: .6em; }
 .prose .admonition-title { font-weight: 700; font-size: .95rem; margin: 0; }
 
+/* بطاقة البحث الأصلي */
+.prose table.paper-card { display: table; font-size: .95rem; }
+.prose .paper-card th { width: 8.5em; color: var(--ink-2); font-weight: 500; border-bottom-color: var(--line); }
+.research-note { color: var(--ink-2); font-size: .9rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+.prose details > :not(summary) + :not(summary) { padding-top: 0; }
+
 /* اختبر نفسك: سؤال يفتح على إجابته */
 .prose details { border-top: 1px solid var(--line); padding-block: .2rem; }
 .prose details + details { margin-top: 0; }

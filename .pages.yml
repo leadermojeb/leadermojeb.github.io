@@ -1,0 +1,196 @@
+# إعدادات محرر Pages CMS (app.pagescms.org)
+# يعرض لك نموذجًا بسيطًا لكتابة المفاهيم والبحوث بدل تعديل الملفات يدويًا
+
+media:
+  input: content/media
+  output: /media
+
+content:
+  - name: concepts
+    label: المفاهيم التقنية
+    type: collection
+    path: content/concepts
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date, title]
+      search: [title, description]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: العنوان
+        type: string
+        required: true
+      - name: description
+        label: سطر يشرح الصفحة
+        type: string
+      - name: date
+        label: التاريخ
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: tags
+        label: الوسوم
+        type: string
+        list: true
+      - name: summary
+        label: الخلاصة (سطرين)
+        type: text
+      - name: body
+        label: المحتوى
+        type: rich-text
+        options:
+          format: markdown
+        default: |
+          ## ما هو ودوره؟
+
+          ## ليش نحتاجه؟ وش يصير بدونه؟
+
+          ## مكوناته
+
+          ## كيف يتواصل؟
+
+          ## كيف يعمل خطوة بخطوة؟
+
+          ## حدوده
+
+          ## كيف أعرف إنه نجح أو فشل؟
+
+          ## العدسة الأمنية
+
+          ### السلوك الطبيعي
+
+          ### كيف يُساء استخدامه؟
+
+          ### وش يحتاج المهاجم؟
+
+          ### السجلات والأدلة المتاحة
+
+          ### كيف نكتشف إساءة الاستخدام؟
+
+          ### احتمالات الـFalse Positive
+
+          ### وسائل الحماية
+
+          ## المصادر
+      - name: questions
+        label: اختبر نفسك
+        type: object
+        list: true
+        fields:
+          - name: question
+            label: السؤال
+            type: string
+          - name: answer
+            label: الإجابة
+            type: text
+      - name: author
+        label: الكاتب (فقط لو الملخص من شخص ثاني)
+        type: string
+      - name: draft
+        label: مسودة (ما تُنشر)
+        type: boolean
+        default: false
+
+  - name: research
+    label: البحوث العلمية
+    type: collection
+    path: content/research
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date, title]
+      search: [title, description]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: العنوان بالعربي
+        type: string
+        required: true
+      - name: description
+        label: سطر يلخص فكرة البحث
+        type: string
+      - name: date
+        label: التاريخ
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: tags
+        label: الوسوم
+        type: string
+        list: true
+      - name: paper
+        label: البحث الأصلي
+        type: object
+        fields:
+          - name: title
+            label: العنوان الأصلي
+            type: string
+          - name: authors
+            label: المؤلفون
+            type: string
+          - name: year
+            label: السنة
+            type: string
+          - name: venue
+            label: المؤتمر أو المجلة
+            type: string
+          - name: link
+            label: الرابط
+            type: string
+      - name: summary
+        label: الخلاصة (ثلاث جمل)
+        type: text
+      - name: body
+        label: المحتوى
+        type: rich-text
+        options:
+          format: markdown
+        default: |
+          ## المشكلة
+
+          ## الطريقة
+
+          ## البيانات
+
+          ## النتائج
+
+          ## الحدود ونقاط الضعف
+
+          ## رأيي
+
+          **هل الأدلة مقنعة؟**
+
+          **وش ناقص؟**
+
+          **هل ينفع يتطبق في الـSOC؟**
+      - name: questions
+        label: اختبر نفسك
+        type: object
+        list: true
+        fields:
+          - name: question
+            label: السؤال
+            type: string
+          - name: answer
+            label: الإجابة
+            type: text
+      - name: author
+        label: الكاتب (فقط لو الملخص من شخص ثاني)
+        type: string
+      - name: draft
+        label: مسودة (ما تُنشر)
+        type: boolean
+        default: false

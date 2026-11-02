@@ -65,10 +65,23 @@ def minutes_label(n):
     return f"قراءة في {n} دقائق" if n <= 10 else f"قراءة في {n} دقيقة"
 
 
+def to_html(text):
+    md = markdown.Markdown(extensions=MD_EXTENSIONS, extension_configs=MD_CONFIG)
+    return md.convert(str(text or ""))
+
+
+def to_date(value):
+    if isinstance(value, dt.datetime):
+        return value.date()
+    if isinstance(value, dt.date):
+        return value
+    return dt.date.fromisoformat(str(value).strip()[:10])
+
+
 def read_post(path, section):
     raw = path.read_text(encoding="utf-8")
     meta, body = {}, raw
-    m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", raw, re.S)
+    m = re.match(r"^---\s*\n(.*?)\n---\s*\n?(.*)$", raw, re.S)
     if m:
         meta = yaml.safe_load(m.group(1)) or {}
         body = m.group(2)
@@ -78,23 +91,39 @@ def read_post(path, section):
     if missing:
         print(f"  ⚠ تم تجاهل {path.relative_to(ROOT)}: ناقص {', '.join(missing)}")
         return None
-    date = meta["date"]
-    if isinstance(date, str):
-        date = dt.date.fromisoformat(date)
-    md = markdown.Markdown(extensions=MD_EXTENSIONS, extension_configs=MD_CONFIG)
-    html = md.convert(body)
-    words = len(re.findall(r"\w+", body))
+    if not body.strip() and meta.get("body"):
+        body = str(meta["body"])
+    date = to_date(meta["date"])
+
+    questions = []
+    for q in meta.get("questions") or []:
+        if isinstance(q, dict) and q.get("question"):
+            questions.append({"question": q["question"], "answer": to_html(q.get("answer", ""))})
+
+    paper = meta.get("paper") if isinstance(meta.get("paper"), dict) else None
+    if paper and not any(paper.values()):
+        paper = None
+
+    text_for_count = " ".join([body, str(meta.get("summary") or "")] +
+                              [f"{q.get('question','')} {q.get('answer','')}" for q in meta.get("questions") or [] if isinstance(q, dict)])
+    words = len(re.findall(r"\w+", text_for_count))
+    tags = meta.get("tags") or []
+    if isinstance(tags, str):
+        tags = [t.strip() for t in tags.split(",") if t.strip()]
     return {
         "slug": path.stem,
         "section": section,
         "title": meta["title"],
-        "description": meta.get("description", ""),
+        "description": meta.get("description") or "",
         "date": date,
         "date_label": arabic_date(date),
-        "tags": meta.get("tags", []) or [],
+        "tags": tags,
         "author": meta.get("author"),
+        "summary": to_html(meta["summary"]) if meta.get("summary") else "",
+        "paper": paper,
+        "questions": questions,
         "minutes": max(1, math.ceil(words / 180)),
-        "html": html,
+        "html": to_html(body),
     }
 
 
@@ -107,6 +136,8 @@ def build():
     if OUT.exists():
         shutil.rmtree(OUT)
     shutil.copytree(THEME / "assets", OUT / "assets")
+    if (CONTENT / "media").exists():
+        shutil.copytree(CONTENT / "media", OUT / "media")
     css = HtmlFormatter(style="github-dark").get_style_defs(".highlight")
     (OUT / "assets" / "code.css").write_text(css, encoding="utf-8")
 
