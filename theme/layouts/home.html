@@ -4,6 +4,7 @@
 <section class="hero wrap">
   <div class="hero-text">
     <h1 class="hero-title">{{ site.title }}</h1>
+    {% if site.tagline %}<p class="hero-tagline" dir="ltr"><span>{{ site.short_title }}</span> {{ site.tagline }}</p>{% endif %}
     <p class="hero-who"><strong>{{ site.author.name }}</strong>، {{ site.author.role }}.</p>
     <p class="lead">{{ site.intro }}</p>
     <p class="lead">{{ site.purpose }}</p>

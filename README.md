@@ -1,4 +1,4 @@
-# من نص إلى مفهوم (M2M)
+# من سؤال إلى مفهوم (M2M · Mind to Mind)
 
 MIND TO MIND
 
