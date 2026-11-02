@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block main %}
+<section class="hero wrap">
+  <div class="hero-text">
+    <h1 class="hero-title">{{ site.title }}</h1>
+    <p class="hero-who"><strong>{{ site.author.name }}</strong>، {{ site.author.role }}.</p>
+    <p class="lead">{{ site.intro }}</p>
+    <p class="lead">{{ site.purpose }}</p>
+  </div>
+
+  {# الممر: إطارات متداخلة تنتهي بنقطة ضوء #}
+  <figure class="corridor" aria-hidden="true">
+    <svg viewBox="0 0 320 400">
+      {% set cx, cy = 160, 200 %}
+      {% set hw, hh = 150, 190 %}
+      {% set steps = [0, 0.4, 0.62, 0.76, 0.855, 0.915] %}
+      {% set last = 1 - steps[-1] %}
+      <g class="rails">
+        {% for sx, sy in [(-1,-1),(1,-1),(1,1),(-1,1)] %}
+        <line x1="{{ cx + sx*hw }}" y1="{{ cy + sy*hh }}" x2="{{ cx + sx*hw*last }}" y2="{{ cy + sy*hh*last }}" />
+        {% endfor %}
+      </g>
+      {% for t in steps %}
+      {% set s = 1 - t %}
+      <rect class="frame" style="--i: {{ loop.index0 }}"
+            x="{{ cx - hw*s }}" y="{{ cy - hh*s }}" width="{{ 2*hw*s }}" height="{{ 2*hh*s }}" />
+      {% endfor %}
+      <rect class="end" x="{{ cx - hw*last }}" y="{{ cy - hh*last }}" width="{{ 2*hw*last }}" height="{{ 2*hh*last }}" />
+    </svg>
+  </figure>
+</section>
+
+<section class="collections wrap" aria-label="المجلدان">
+  {% for key in ['concepts', 'research'] %}
+  {% set sec = site.sections[key] %}
+  <div class="collection">
+    <div class="collection-head">
+      <h2><a href="{{ root }}{{ key }}/">{{ sec.title }}</a></h2>
+      <span class="count">{{ posts[key]|length|count_label }}</span>
+    </div>
+    <p class="collection-desc">{{ sec.description }}</p>
+    {% if posts[key] %}
+    <ul class="post-list compact">
+      {% for p in posts[key][:3] %}
+      <li>
+        <a href="{{ root }}{{ key }}/{{ p.slug }}/">{{ p.title }}</a>
+        <time datetime="{{ p.date }}">{{ p.date_label }}</time>
+      </li>
+      {% endfor %}
+    </ul>
+    <a class="more" href="{{ root }}{{ key }}/">عرض الكل</a>
+    {% else %}
+    <p class="empty">أول ملخص في الطريق.</p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</section>
+
+<section id="contact" class="contribute">
+  <div class="wrap contribute-inner">
+    <div>
+      <h2>{{ site.contribute.title }}</h2>
+      <p>{{ site.contribute.text }}</p>
+    </div>
+    <ul class="contact-list pills">
+      {% for c in site.contacts %}
+      <li><a href="{{ c.url }}" rel="me noopener">{{ c.label }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

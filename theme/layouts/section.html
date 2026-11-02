@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% set sec = site.sections[section] %}
+
+{% block title %}{{ sec.title }} | {{ site.title }}{% endblock %}
+{% block description %}{{ sec.description }}{% endblock %}
+
+{% block main %}
+<section class="page-head wrap">
+  <h1>{{ sec.title }}</h1>
+  <p class="page-desc">{{ sec.description }}</p>
+  {% if items %}
+  <div class="filter">
+    <label for="q" class="visually-hidden">ابحث في {{ sec.title }}</label>
+    <input id="q" type="search" placeholder="ابحث بالعنوان أو الوسم" autocomplete="off">
+    <span class="count">{{ items|length|count_label }}</span>
+  </div>
+  {% endif %}
+</section>
+
+<div class="wrap">
+  {% if items %}
+  <ul class="post-list full" id="posts">
+    {% for p in items %}
+    <li data-search="{{ p.title }} {{ p.description }} {{ p.tags|join(' ') }}">
+      <a href="{{ p.slug }}/">
+        <h2>{{ p.title }}</h2>
+        {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+      </a>
+      <div class="meta">
+        <time datetime="{{ p.date }}">{{ p.date_label }}</time>
+        {% for t in p.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <p class="empty" id="no-results" hidden>لا توجد نتائج مطابقة. جرّب كلمة أخرى.</p>
+  <script>
+    (function () {
+      var q = document.getElementById('q');
+      var rows = document.querySelectorAll('#posts li');
+      var none = document.getElementById('no-results');
+      q.addEventListener('input', function () {
+        var v = q.value.trim().toLowerCase(), shown = 0;
+        rows.forEach(function (r) {
+          var hit = r.dataset.search.toLowerCase().indexOf(v) !== -1;
+          r.hidden = !hit; if (hit) shown++;
+        });
+        none.hidden = shown !== 0;
+      });
+    })();
+  </script>
+  {% else %}
+  <p class="empty">لا توجد ملخصات منشورة في هذا القسم بعد.</p>
+  {% endif %}
+</div>
+{% endblock %}

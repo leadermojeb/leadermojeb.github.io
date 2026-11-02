@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% set sec = site.sections[post.section] %}
+
+{% block title %}{{ post.title }} | {{ site.title }}{% endblock %}
+{% block description %}{{ post.description or sec.description }}{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ root }}assets/code.css">{% endblock %}
+
+{% block main %}
+<article class="article narrow">
+  <header class="article-head">
+    <a class="crumb" href="../">{{ sec.title }}</a>
+    <h1>{{ post.title }}</h1>
+    {% if post.description %}<p class="dek">{{ post.description }}</p>{% endif %}
+    <div class="meta">
+      <span>{{ post.author or site.author.name }}</span>
+      <time datetime="{{ post.date }}">{{ post.date_label }}</time>
+      <span>{{ post.minutes|minutes_label }}</span>
+    </div>
+  </header>
+
+  <div class="prose">
+    {{ post.html|safe }}
+  </div>
+
+  {% if post.tags %}
+  <div class="article-tags">
+    {% for t in post.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+  </div>
+  {% endif %}
+
+  <footer class="article-foot">
+    <a href="../">العودة إلى {{ sec.title }}</a>
+  </footer>
+</article>
+{% endblock %}

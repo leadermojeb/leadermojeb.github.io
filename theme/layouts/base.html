@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site.title }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
+  <meta name="theme-color" content="#16243A">
+  <link rel="preload" href="{{ root }}assets/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ root }}assets/style.css">
+  {% block head %}{% endblock %}
+</head>
+<body class="page-{{ page }}">
+  <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="{{ root }}">
+        <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" />
+          <rect x="6.5" y="6.5" width="11" height="11" />
+          <rect class="end" x="10" y="10" width="4" height="4" />
+        </svg>
+        <span>{{ site.title }}</span>
+      </a>
+      <nav class="site-nav" aria-label="الأقسام">
+        <a href="{{ root }}concepts/"{% if page == 'concepts' %} aria-current="page"{% endif %}>المفاهيم</a>
+        <a href="{{ root }}research/"{% if page == 'research' %} aria-current="page"{% endif %}>البحوث</a>
+        <a href="{{ root }}#contact">تواصل</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    {% block main %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-name">{{ site.author.name }}</p>
+        <p class="footer-note">{{ site.footer_note }}</p>
+      </div>
+      <ul class="contact-list">
+        {% for c in site.contacts %}
+        <li><a href="{{ c.url }}" rel="me noopener">{{ c.label }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

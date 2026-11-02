@@ -1,0 +1,273 @@
+/* ============================================================
+   دهاليز التقنية — التصميم
+   ============================================================ */
+
+/* ── الخطوط ──
+   خط ثمانية يُستخدم إذا كان مثبّتًا على جهاز الزائر،
+   وإلا IBM Plex Sans Arabic (رخصة مفتوحة OFL، مرفوعة مع الموقع) */
+@font-face { font-family: "Plex Arabic"; font-weight: 400; font-display: swap;
+  src: url(fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC; }
+@font-face { font-family: "Plex Arabic"; font-weight: 500; font-display: swap;
+  src: url(fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2) format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC; }
+@font-face { font-family: "Plex Arabic"; font-weight: 700; font-display: swap;
+  src: url(fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2) format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC; }
+@font-face { font-family: "Plex Arabic"; font-weight: 400; font-display: swap;
+  src: url(fonts/ibm-plex-sans-arabic-latin-400-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Plex Arabic"; font-weight: 500; font-display: swap;
+  src: url(fonts/ibm-plex-sans-arabic-latin-500-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Plex Arabic"; font-weight: 700; font-display: swap;
+  src: url(fonts/ibm-plex-sans-arabic-latin-700-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Plex Mono"; font-weight: 400; font-display: swap;
+  src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2"); }
+
+/* ── الألوان والمقاسات ── */
+:root {
+  --bg: #FBFBFC;
+  --surface: #F1F3F7;
+  --ink: #16243A;          /* حبر كحلي */
+  --ink-2: #536177;        /* نص ثانوي */
+  --line: #DCE1E9;
+  --accent: #C27A0E;       /* كهرماني: لون تنبيه الـSOC، للزينة والتأكيد فقط */
+  --code-bg: #101C2E;
+  --code-ink: #E6EDF6;
+
+  --font: "Thmanyah Sans", "Thmanyah", "Plex Arabic", system-ui, sans-serif;
+  --mono: "Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --wrap: 1080px;
+  --narrow: 720px;
+  --pad: clamp(20px, 5vw, 40px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0D1522;
+    --surface: #142033;
+    --ink: #E8EDF4;
+    --ink-2: #9AA8BC;
+    --line: #233149;
+    --accent: #F0A640;
+    --code-bg: #0A111D;
+  }
+}
+
+/* ── الأساس ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.125rem;
+  line-height: 1.85;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 { line-height: 1.35; font-weight: 700; margin: 0; }
+p { margin: 0 0 1em; }
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: .35em; text-decoration-thickness: 1.5px; }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+img { max-width: 100%; height: auto; }
+
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--pad); }
+.narrow { max-width: var(--narrow); margin-inline: auto; padding-inline: var(--pad); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; inset-inline-start: 1rem; top: -4rem; background: var(--ink); color: var(--bg); padding: .5rem 1rem; z-index: 10; }
+.skip:focus { top: 1rem; }
+
+/* ── الترويسة ── */
+.site-header { border-bottom: 1px solid var(--line); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 72px; }
+.brand { display: inline-flex; align-items: center; gap: .65rem; font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+.brand:hover { color: var(--ink); }
+.brand-mark { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.brand-mark .end { fill: var(--accent); stroke: none; }
+.site-nav { display: flex; gap: clamp(1rem, 3vw, 2rem); font-size: 1rem; }
+.site-nav a { text-decoration: none; color: var(--ink-2); padding-block: .25rem; }
+.site-nav a:hover { color: var(--ink); }
+.site-nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+
+/* ── الواجهة ── */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  padding-block: clamp(3rem, 9vw, 6.5rem);
+}
+.hero-title { font-size: clamp(2.75rem, 7.5vw, 5.25rem); line-height: 1.15; margin-bottom: .6em; }
+.hero-who { font-size: 1.2rem; margin-bottom: 1.4em; color: var(--ink); }
+.hero-who strong { font-weight: 700; }
+.lead { color: var(--ink-2); font-size: 1.15rem; max-width: 34em; }
+
+.corridor { margin: 0; justify-self: center; width: min(100%, 300px); color: var(--ink); }
+.corridor svg { display: block; width: 100%; height: auto; overflow: visible; }
+.corridor .frame, .corridor .rails line { fill: none; stroke: currentColor; stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.corridor .rails line { stroke-opacity: .35; }
+.corridor .frame { opacity: calc(1 - var(--i) * .11); }
+.corridor .end { fill: var(--accent); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .corridor .frame { animation: frame-in .7s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i) * 110ms); }
+  .corridor .end { animation: glow 1s ease-out .75s both; }
+  @keyframes frame-in { from { opacity: 0; transform: scale(1.04); transform-origin: 50% 50%; } }
+  @keyframes glow { from { opacity: 0; } }
+}
+
+/* ── المجلدان ── */
+.collections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.collection { padding-block: 2.5rem 3rem; border-top: 1px solid var(--line); }
+.collection:first-child { padding-inline-end: clamp(1.5rem, 4vw, 3rem); }
+.collection + .collection { padding-inline-start: clamp(1.5rem, 4vw, 3rem); border-inline-start: 1px solid var(--line); }
+.collection-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: .5rem; }
+.collection-head h2 { font-size: 1.6rem; }
+.collection-head h2 a { text-decoration: none; }
+.count { color: var(--ink-2); font-size: .9rem; white-space: nowrap; }
+.collection-desc { color: var(--ink-2); max-width: 30em; }
+.more { display: inline-block; margin-top: 1rem; font-weight: 500; font-size: 1rem; }
+.empty { color: var(--ink-2); font-size: 1rem; padding: 1rem 0; border-top: 1px dashed var(--line); margin-top: 1.5rem; }
+
+/* ── القوائم ── */
+.post-list { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+.post-list li { border-top: 1px solid var(--line); }
+.post-list.compact li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-block: .85rem; }
+.post-list.compact a { text-decoration: none; font-weight: 500; }
+.post-list time { color: var(--ink-2); font-size: .85rem; white-space: nowrap; }
+
+.post-list.full li { padding-block: 1.6rem; }
+.post-list.full li:last-child { border-bottom: 1px solid var(--line); }
+.post-list.full a { text-decoration: none; display: block; }
+.post-list.full h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: .3rem; }
+.post-list.full a:hover h2 { color: var(--accent); }
+.post-list.full p { color: var(--ink-2); margin: 0 0 .6rem; max-width: 40em; }
+.post-list.full a:hover p { color: var(--ink-2); }
+
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; color: var(--ink-2); font-size: .9rem; }
+.tag { font-size: .8rem; color: var(--ink-2); background: var(--surface); padding: .1rem .6rem; border-radius: 4px; direction: auto; unicode-bidi: isolate; }
+
+/* ── رأس الصفحات الداخلية ── */
+.page-head { padding-block: clamp(2.5rem, 7vw, 4.5rem) 1.5rem; }
+.page-head h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: .4em; }
+.page-desc { color: var(--ink-2); font-size: 1.15rem; max-width: 36em; }
+.filter { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+.filter input {
+  flex: 0 1 360px; font: inherit; font-size: 1rem; color: var(--ink);
+  background: var(--surface); border: 1px solid transparent; border-radius: 8px;
+  padding: .6rem 1rem;
+}
+.filter input::placeholder { color: var(--ink-2); }
+.filter input:focus { outline: none; border-color: var(--accent); }
+
+/* ── صفحة الملخص ── */
+.article { padding-block: clamp(2.5rem, 7vw, 4.5rem) 4rem; }
+.article-head { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
+.crumb { display: inline-block; color: var(--ink-2); font-size: .95rem; text-decoration: none; margin-bottom: 1rem; }
+.article-head h1 { font-size: clamp(2rem, 5vw, 2.9rem); margin-bottom: .5em; }
+.dek { color: var(--ink-2); font-size: 1.2rem; }
+.article-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 3rem; }
+.article-foot { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+
+/* ── النص الطويل ── */
+.prose > * + * { margin-top: 1.1em; }
+.prose p { margin: 0; }
+.prose h2 { font-size: 1.55rem; margin-top: 2.6em; }
+.prose h3 { font-size: 1.2rem; margin-top: 2em; }
+.prose h2 + *, .prose h3 + * { margin-top: .7em; }
+.prose ul, .prose ol { padding-inline-start: 1.4em; margin-bottom: 0; }
+.prose li + li { margin-top: .35em; }
+.prose li::marker { color: var(--ink-2); }
+.prose strong { font-weight: 700; }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin-block: 2.5em; }
+.prose blockquote { margin-inline: 0; padding-inline-start: 1.2em; border-inline-start: 3px solid var(--accent); color: var(--ink-2); }
+.prose mark { background: color-mix(in srgb, var(--accent) 25%, transparent); color: inherit; padding-inline: .15em; }
+
+.prose table { width: 100%; border-collapse: collapse; font-size: 1rem; display: block; overflow-x: auto; }
+.prose th, .prose td { text-align: start; padding: .65em .9em; border-bottom: 1px solid var(--line); vertical-align: top; }
+.prose th { font-weight: 700; border-bottom-color: var(--ink-2); }
+
+.prose code {
+  font-family: var(--mono); font-size: .85em; direction: ltr; unicode-bidi: isolate;
+  background: var(--surface); padding: .1em .4em; border-radius: 4px;
+}
+.prose pre, .prose .highlight {
+  direction: ltr; text-align: left;
+  background: var(--code-bg) !important; color: var(--code-ink);
+  border-radius: 10px; margin-block: 1.4em;
+}
+.prose .highlight pre { margin: 0; background: transparent !important; }
+.prose pre { padding: 1.1rem 1.25rem; overflow-x: auto; font-size: .9rem; line-height: 1.7; }
+.prose pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
+
+/* الصناديق (الخلاصة، الملاحظات) */
+.prose .admonition {
+  background: var(--surface); border-inline-start: 3px solid var(--accent);
+  padding: 1rem 1.25rem; border-start-end-radius: 6px; border-end-end-radius: 6px;
+}
+.prose .admonition > * + * { margin-top: .6em; }
+.prose .admonition-title { font-weight: 700; font-size: .95rem; margin: 0; }
+
+/* اختبر نفسك: سؤال يفتح على إجابته */
+.prose details { border-top: 1px solid var(--line); padding-block: .2rem; }
+.prose details + details { margin-top: 0; }
+.prose details:last-of-type { border-bottom: 1px solid var(--line); }
+.prose summary {
+  cursor: pointer; list-style: none; font-weight: 500;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: .8rem;
+}
+.prose summary::-webkit-details-marker { display: none; }
+.prose summary::after {
+  content: "+"; font-size: 1.4rem; line-height: 1; color: var(--accent);
+  transition: transform .2s ease;
+}
+.prose details[open] summary::after { transform: rotate(45deg); }
+.prose details > :not(summary) { color: var(--ink-2); padding-bottom: 1rem; margin: 0; }
+
+/* ── قسم المشاركة ── */
+.contribute { background: var(--surface); }
+.contribute-inner {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: 1.5rem 3rem; padding-block: clamp(2.5rem, 6vw, 3.5rem);
+}
+.contribute h2 { font-size: 1.5rem; margin-bottom: .4em; }
+.contribute p { color: var(--ink-2); max-width: 32em; margin: 0; }
+
+.contact-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
+.contact-list a { text-decoration: none; color: var(--ink-2); font-size: .95rem; }
+.contact-list a:hover { color: var(--ink); }
+.contact-list.pills { gap: .6rem; }
+.contact-list.pills a {
+  display: inline-block; color: var(--ink); font-weight: 500;
+  border: 1px solid var(--line); background: var(--bg);
+  border-radius: 999px; padding: .45rem 1.1rem;
+}
+.contact-list.pills a:hover { border-color: var(--accent); color: var(--ink); }
+
+/* ── التذييل ── */
+.site-footer { border-top: 1px solid var(--line); }
+.footer-inner { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; padding-block: 2.25rem; }
+.page-home .site-footer .contact-list { display: none; }
+.footer-name { font-weight: 700; margin: 0; }
+.footer-note { color: var(--ink-2); font-size: .9rem; margin: 0; }
+
+/* ── الجوال ── */
+@media (max-width: 760px) {
+  body { font-size: 1.0625rem; }
+  .hero { grid-template-columns: 1fr; padding-block: 2.5rem 3rem; }
+  .corridor { order: -1; justify-self: start; width: 120px; }
+  .collections { grid-template-columns: 1fr; }
+  .collection:first-child { padding-inline-end: 0; }
+  .collection + .collection { padding-inline-start: 0; border-inline-start: 0; }
+  .post-list.compact li { flex-direction: column; gap: .1rem; }
+  .filter { flex-wrap: wrap; }
+  .filter input { flex-basis: 100%; }
+}

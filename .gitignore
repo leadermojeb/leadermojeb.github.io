@@ -1,0 +1,21 @@
+# مسودات: تبقى على جهازك وما تنرفع أبدًا
+drafts/
+
+# ناتج البناء (GitHub يبنيه بنفسه)
+_site/
+__pycache__/
+
+# OS & editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# شبكة أمان: ملفات أدلة وأسرار ما مكانها هنا
+*.log
+*.pcap
+*.pcapng
+*.evtx
+.env
+*.key
+*.pem
