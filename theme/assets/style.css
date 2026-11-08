@@ -149,21 +149,34 @@ img { max-width: 100%; height: auto; }
   @keyframes title-in { from { opacity: 0; } }
 }
 
-/* ── المجلدان ── */
+/* ── المجلدان: بطاقتان ── */
 .collections {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  padding-bottom: clamp(3rem, 7vw, 4.5rem);
 }
-.collection { padding-block: 2.5rem 3rem; border-top: 1px solid var(--line); }
-.collection:first-child { padding-inline-end: clamp(1.5rem, 4vw, 3rem); }
-.collection + .collection { padding-inline-start: clamp(1.5rem, 4vw, 3rem); border-inline-start: 1px solid var(--line); }
-.collection-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: .5rem; }
-.collection-head h2 { font-size: 1.6rem; }
+.collection {
+  display: flex; flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  transition: border-color .2s ease;
+}
+.collection:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+.collection-head { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
+.collection-dot { flex: none; width: 10px; height: 10px; background: var(--accent); }
+.collection-head h2 { font-size: 1.55rem; }
 .collection-head h2 a { text-decoration: none; }
+.collection-head .count { margin-inline-start: auto; }
 .count { color: var(--ink-2); font-size: .9rem; white-space: nowrap; }
-.collection-desc { color: var(--ink-2); max-width: 30em; }
-.more { display: inline-block; margin-top: 1rem; font-weight: 500; font-size: 1rem; }
+.collection-desc { color: var(--ink-2); margin: 0 0 1.5rem; }
+.collection .post-list.compact { margin-top: 0; }
+.collection .post-list li { border-top-color: color-mix(in srgb, var(--line) 80%, var(--ink-2)); }
+.more { display: inline-block; align-self: flex-start; margin-top: 1rem; font-weight: 500; font-size: 1rem; }
 .empty { color: var(--ink-2); font-size: 1rem; padding: 1rem 0; border-top: 1px dashed var(--line); margin-top: 1.5rem; }
+.collection .empty { margin-top: auto; padding-bottom: 0; border-top-color: color-mix(in srgb, var(--line) 70%, var(--ink-2)); }
 
 /* ── القوائم ── */
 .post-list { list-style: none; margin: 1.5rem 0 0; padding: 0; }
@@ -302,8 +315,6 @@ img { max-width: 100%; height: auto; }
   .brand span { font-size: 1rem; }
   .theme-toggle { width: 34px; height: 34px; }
   .collections { grid-template-columns: 1fr; }
-  .collection:first-child { padding-inline-end: 0; }
-  .collection + .collection { padding-inline-start: 0; border-inline-start: 0; }
   .post-list.compact li { flex-direction: column; gap: .1rem; }
   .filter { flex-wrap: wrap; }
   .filter input { flex-basis: 100%; }

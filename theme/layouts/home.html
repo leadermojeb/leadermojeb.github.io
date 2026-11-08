@@ -17,11 +17,12 @@
 <section class="collections wrap" aria-label="المجلدان">
   {% for key in ['concepts', 'research'] %}
   {% set sec = site.sections[key] %}
-  <div class="collection">
-    <div class="collection-head">
+  <article class="collection">
+    <header class="collection-head">
+      <span class="collection-dot" aria-hidden="true"></span>
       <h2><a href="{{ root }}{{ key }}/">{{ sec.title }}</a></h2>
-      <span class="count">{{ posts[key]|length|count_label }}</span>
-    </div>
+      {% if posts[key] %}<span class="count">{{ posts[key]|length|count_label }}</span>{% endif %}
+    </header>
     <p class="collection-desc">{{ sec.description }}</p>
     {% if posts[key] %}
     <ul class="post-list compact">
@@ -36,7 +37,7 @@
     {% else %}
     <p class="empty">أول ملخص في الطريق.</p>
     {% endif %}
-  </div>
+  </article>
   {% endfor %}
 </section>
 
