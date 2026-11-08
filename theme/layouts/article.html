@@ -8,7 +8,7 @@
 {% block main %}
 <article class="article narrow">
   <header class="article-head">
-    <a class="crumb" href="../">{{ sec.title }}</a>
+    <a class="back-link" href="../"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>{{ sec.title }}</span></a>
     <h1>{{ post.title }}</h1>
     {% if post.description %}<p class="dek">{{ post.description }}</p>{% endif %}
     <div class="meta">
