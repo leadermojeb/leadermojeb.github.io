@@ -99,7 +99,7 @@ img { max-width: 100%; height: auto; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 72px; }
 .brand { white-space: nowrap; display: inline-flex; align-items: center; gap: .65rem; font-weight: 700; font-size: 1.15rem; letter-spacing: .02em; text-decoration: none; }
 .brand:hover { color: var(--ink); }
-.brand-mark { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.brand-mark { width: 28px; height: 28px; fill: none; stroke: currentColor; }
 .brand-mark .end { fill: var(--accent); stroke: none; }
 .site-nav { display: flex; gap: clamp(1rem, 3vw, 2rem); font-size: 1rem; }
 .site-nav a { text-decoration: none; color: var(--ink-2); padding-block: .25rem; }
