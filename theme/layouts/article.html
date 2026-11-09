@@ -3,6 +3,7 @@
 
 {% block title %}{{ post.title }} | {{ site.title }}{% endblock %}
 {% block description %}{{ post.description or sec.description }}{% endblock %}
+{% block og_type %}article{% endblock %}
 {% block head %}<link rel="stylesheet" href="{{ root }}assets/code.css">{% endblock %}
 
 {% block main %}
@@ -13,6 +14,7 @@
     {% if post.description %}<p class="dek">{{ post.description }}</p>{% endif %}
     <div class="meta">
       <span>{{ post.author or site.author.name }}</span>
+      {% if post.category %}<a class="meta-cat" href="../{{ post.category }}/">{{ post.category_title }}</a>{% endif %}
       <time datetime="{{ post.date }}">{{ post.date_label }}</time>
       <span>{{ post.minutes|minutes_label }}</span>
     </div>

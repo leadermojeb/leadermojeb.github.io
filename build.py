@@ -119,6 +119,7 @@ def read_post(path, section):
         "date_label": arabic_date(date),
         "tags": tags,
         "author": meta.get("author"),
+        "category": (str(meta["category"]).strip() if meta.get("category") else None),
         "summary": to_html(meta["summary"]) if meta.get("summary") else "",
         "paper": paper,
         "questions": questions,
@@ -141,12 +142,26 @@ def build():
     css = HtmlFormatter(style="github-dark").get_style_defs(".highlight")
     (OUT / "assets" / "code.css").write_text(css, encoding="utf-8")
 
-    posts = {}
+    posts, cats = {}, {}
     for sec in SECTIONS:
         folder = CONTENT / sec
         items = [read_post(p, sec) for p in sorted(folder.glob("*.md"))
                  if not p.name.startswith("_")]
-        posts[sec] = sorted([p for p in items if p], key=lambda p: p["date"], reverse=True)
+        items = sorted([p for p in items if p], key=lambda p: p["date"], reverse=True)
+        sec_cats = site["sections"][sec].get("categories") or []
+        titles = {c["id"]: c["title"] for c in sec_cats}
+        for p in items:
+            if p["category"] and p["category"] not in titles:
+                print(f"  ⚠ {sec}/{p['slug']}: التصنيف '{p['category']}' غير موجود في site.yml")
+                p["category"] = None
+            p["category_title"] = titles.get(p["category"])
+            if p["slug"] in titles:
+                print(f"  ⚠ {sec}/{p['slug']}: اسم الملف يطابق اسم تصنيف، غيّره")
+        posts[sec] = [p for p in items if p["slug"] not in titles]
+        cats[sec] = [{**c, "count": sum(1 for p in posts[sec] if p["category"] == c["id"])} for c in sec_cats]
+
+    site_url = str(site.get("url", "")).rstrip("/")
+    pages = []
 
     def write(rel, template, root=None, **ctx):
         target = OUT / rel
@@ -154,16 +169,36 @@ def build():
         if root is None:
             depth = len(Path(rel).parts) - 1
             root = "../" * depth if depth else "./"
-        html = env.get_template(template).render(root=root, **ctx)
+        path = "/" + rel[: -len("index.html")] if rel.endswith("index.html") else "/" + rel
+        html = env.get_template(template).render(root=root, page_url=site_url + path, **ctx)
         target.write_text(html, encoding="utf-8")
+        if rel != "404.html":
+            pages.append((site_url + path, ctx.get("lastmod")))
 
-    write("index.html", "home.html", posts=posts, page="home")
+    write("index.html", "home.html", posts=posts, cats=cats, page="home")
     # صفحة 404 تظهر على أي رابط، فتحتاج مسارًا ثابتًا
     write("404.html", "404.html", root=site.get("base", "/"), page="404")
     for sec in SECTIONS:
-        write(f"{sec}/index.html", "section.html", section=sec, items=posts[sec], page=sec)
+        write(f"{sec}/index.html", "section.html", section=sec, items=posts[sec],
+              cats=cats[sec], active=None, page=sec)
+        for c in cats[sec]:
+            items = [p for p in posts[sec] if p["category"] == c["id"]]
+            write(f"{sec}/{c['id']}/index.html", "section.html", section=sec, items=items,
+                  cats=cats[sec], active=c, page=sec)
         for p in posts[sec]:
-            write(f"{sec}/{p['slug']}/index.html", "article.html", post=p, page=sec)
+            write(f"{sec}/{p['slug']}/index.html", "article.html", post=p, page=sec, lastmod=p["date"])
+
+    # خريطة الموقع لمحركات البحث
+    if site_url:
+        rows = "\n".join(
+            f"  <url><loc>{u}</loc>" + (f"<lastmod>{m.isoformat()}</lastmod>" if m else "") + "</url>"
+            for u, m in pages)
+        (OUT / "sitemap.xml").write_text(
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + rows + "\n</urlset>\n",
+            encoding="utf-8")
+        (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {site_url}/sitemap.xml\n",
+                                         encoding="utf-8")
 
     total = sum(len(v) for v in posts.values())
     print(f"✓ تم بناء الموقع في {OUT.name}/ ({count_label(total)})")

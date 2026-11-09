@@ -6,6 +6,18 @@
   <title>{% block title %}{{ site.title }}{% if site.short_title %} | {{ site.short_title }}{% endif %}{% endblock %}</title>
   <meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
   <meta name="theme-color" content="#16243A">
+  <link rel="canonical" href="{{ page_url }}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:site_name" content="{{ site.title }} | {{ site.short_title }}">
+  <meta property="og:locale" content="ar_SA">
+  <meta property="og:title" content="{{ self.title()|trim }}">
+  <meta property="og:description" content="{{ self.description()|trim }}">
+  <meta property="og:url" content="{{ page_url }}">
+  <meta property="og:image" content="{{ site.url }}/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ site.title }}، {{ site.short_title }}: {{ site.tagline }}">
+  <meta name="twitter:card" content="summary_large_image">
   <script>
     (function () {
       var t = null;

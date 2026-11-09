@@ -15,7 +15,7 @@ content:
       template: "{primary}.md"
       field: create
     view:
-      fields: [title, date, draft]
+      fields: [title, category, date, draft]
       primary: title
       sort: [date, title]
       search: [title, description]
@@ -39,6 +39,19 @@ content:
         label: الوسوم
         type: string
         list: true
+      - name: category
+        label: التصنيف
+        type: select
+        options:
+          values:
+            - name: cyber
+              label: الأمن السيبراني
+            - name: ai
+              label: الذكاء الاصطناعي
+            - name: networking
+              label: الشبكات
+            - name: systems
+              label: الأنظمة
       - name: summary
         label: الخلاصة (سطرين)
         type: text
@@ -91,7 +104,7 @@ content:
       template: "{primary}.md"
       field: create
     view:
-      fields: [title, date, draft]
+      fields: [title, category, date, draft]
       primary: title
       sort: [date, title]
       search: [title, description]
@@ -115,6 +128,19 @@ content:
         label: الوسوم
         type: string
         list: true
+      - name: category
+        label: التصنيف
+        type: select
+        options:
+          values:
+            - name: cyber
+              label: الأمن السيبراني
+            - name: ai
+              label: الذكاء الاصطناعي
+            - name: networking
+              label: الشبكات
+            - name: systems
+              label: الأنظمة
       - name: paper
         label: البحث الأصلي
         type: object
