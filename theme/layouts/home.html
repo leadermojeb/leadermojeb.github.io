@@ -24,11 +24,6 @@
       {% if posts[key] %}<span class="count">{{ posts[key]|length|count_label }}</span>{% endif %}
     </header>
     <p class="collection-desc">{{ sec.description }}</p>
-    {% if cats[key] %}
-    <nav class="chips small" aria-label="تصنيفات {{ sec.title }}">
-      {% for c in cats[key] %}<a href="{{ root }}{{ key }}/{{ c.id }}/">{{ c.title }}</a>{% endfor %}
-    </nav>
-    {% endif %}
     {% if posts[key] %}
     <ul class="post-list compact">
       {% for p in posts[key][:3] %}
