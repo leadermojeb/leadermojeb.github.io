@@ -171,12 +171,12 @@ img { max-width: 100%; height: auto; }
 .collection-head h2 a { text-decoration: none; }
 .collection-head .count { margin-inline-start: auto; }
 .count { color: var(--ink-2); font-size: .9rem; white-space: nowrap; }
-.collection-desc { color: var(--ink-2); margin: 0 0 1.5rem; }
+.collection-desc { color: var(--ink-2); margin: 0; }
+.collection-desc + .post-list { margin-top: 1.5rem; }
 .collection .post-list.compact { margin-top: 0; }
 .collection .post-list li { border-top-color: color-mix(in srgb, var(--line) 80%, var(--ink-2)); }
 .more { display: inline-block; align-self: flex-start; margin-top: 1rem; font-weight: 500; font-size: 1rem; }
 .empty { color: var(--ink-2); font-size: 1rem; padding: 1rem 0; border-top: 1px dashed var(--line); margin-top: 1.5rem; }
-.collection .empty { margin-top: auto; padding-bottom: 0; border-top-color: color-mix(in srgb, var(--line) 70%, var(--ink-2)); }
 
 /* ── القوائم ── */
 .post-list { list-style: none; margin: 1.5rem 0 0; padding: 0; }
