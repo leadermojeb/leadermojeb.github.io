@@ -1,14 +1,57 @@
 {% extends "base.html" %}
 
 {% block main %}
-<section class="hero wrap">
+{# ── ١. الواجهة: أنت أولًا ── #}
+<section class="intro wrap{% if not site.photo %} no-photo{% endif %}">
+  <div class="intro-text">
+    <h1 class="intro-name">{{ site.author.name }}</h1>
+    <p class="intro-role">{{ site.author.role }}</p>
+    <p class="intro-line">{{ site.hero_line }}</p>
+    <div class="intro-actions">
+      <a class="btn btn-primary" href="{{ root }}concepts/">{{ site.sections.concepts.title }}</a>
+      <a class="btn" href="{{ root }}research/">{{ site.sections.research.title }}</a>
+      <a class="btn" href="#contact">للتواصل</a>
+    </div>
+  </div>
+  {% if site.photo %}
+  <figure class="intro-photo">
+    <img src="{{ root }}{{ site.photo }}" alt="{{ site.author.name }}" width="320" height="320">
+  </figure>
+  {% endif %}
+</section>
+
+{# ── ٢. عني ── #}
+<section class="block wrap" id="about">
+  <h2 class="block-title">عني</h2>
+  <div class="block-body">
+    {% for para in site.about %}<p class="lead">{{ para }}</p>{% endfor %}
+  </div>
+</section>
+
+{# ── ٣. أشتغل على ── #}
+<section class="block block-wide wrap">
+  <h2 class="block-title">{{ site.tools_title }}</h2>
+  <div class="marquee">
+    <div class="marquee-track" dir="ltr">
+      {% for copy in range(4) %}
+      <ul class="marquee-group"{% if copy %} aria-hidden="true"{% endif %}>
+        {% for t in site.tools %}
+        <li class="logo-tile"><img{% if t.square %} class="square"{% endif %} src="{{ root }}{{ t.logo }}" alt="{{ '' if copy else t.name }}" width="160" height="160" decoding="async"></li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── ٥. M2M: الواجهة السابقة كما هي ── #}
+<section class="hero m2m wrap" id="m2m">
   <div class="hero-head">
     <span class="hero-mark" aria-hidden="true" dir="ltr">M<b>2</b>M</span>
-    <h1 class="hero-title">{{ site.title }}</h1>
+    <h2 class="hero-title">{{ site.title }}</h2>
     {% if site.tagline %}<p class="hero-tagline" dir="ltr">{{ site.tagline }}</p>{% endif %}
   </div>
   <div class="hero-text">
-    <p class="hero-who"><strong>{{ site.author.name }}</strong>، {{ site.author.role }}.</p>
     <p class="lead">{{ site.intro }}</p>
     <p class="lead">{{ site.purpose }}</p>
   </div>
@@ -39,6 +82,7 @@
   {% endfor %}
 </section>
 
+{# ── ٧. شاركني الطريق + التواصل ── #}
 <section id="contact" class="contribute">
   <div class="wrap contribute-inner">
     <div>

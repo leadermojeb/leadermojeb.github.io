@@ -7,7 +7,7 @@ media:
 
 content:
   - name: concepts
-    label: المفاهيم التقنية
+    label: ما يبقى (المفاهيم)
     type: collection
     path: content/concepts
     format: yaml-frontmatter
@@ -96,7 +96,7 @@ content:
         default: false
 
   - name: research
-    label: البحوث العلمية
+    label: خُطى (البحوث)
     type: collection
     path: content/research
     format: yaml-frontmatter

@@ -45,12 +45,13 @@
           <path d="M68 32 C68 21 60 14 50 14 C39 14 32 22 32 32 C32 42 42 45 50 50 L50 61" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
           <rect class="end" x="42" y="72" width="16" height="16" />
         </svg>
-        <span>{{ site.short_title or site.title }}</span>
+        <span>{{ site.author.name }}</span>
       </a>
       <div class="header-tools">
         <nav class="site-nav" aria-label="الأقسام">
-          <a href="{{ root }}concepts/"{% if page == 'concepts' %} aria-current="page"{% endif %}>المفاهيم</a>
-          <a href="{{ root }}research/"{% if page == 'research' %} aria-current="page"{% endif %}>البحوث</a>
+          <a class="nav-about" href="{{ root }}#about">عني</a>
+          <a href="{{ root }}concepts/"{% if page == 'concepts' %} aria-current="page"{% endif %}>{{ site.sections.concepts.title }}</a>
+          <a href="{{ root }}research/"{% if page == 'research' %} aria-current="page"{% endif %}>{{ site.sections.research.title }}</a>
           <a href="{{ root }}#contact">للتواصل</a>
         </nav>
         <button class="theme-toggle" type="button" aria-label="تبديل الوضع الفاتح والداكن">
