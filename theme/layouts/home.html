@@ -8,8 +8,8 @@
     <p class="intro-role">{{ site.author.role }}</p>
     <p class="intro-line">{{ site.hero_line }}</p>
     <div class="intro-actions">
-      <a class="btn btn-primary" href="{{ root }}concepts/">المفاهيم التقنية</a>
-      <a class="btn" href="{{ root }}research/">البحوث العلمية</a>
+      <a class="btn btn-primary" href="{{ root }}concepts/">{{ site.sections.concepts.title }}</a>
+      <a class="btn" href="{{ root }}research/">{{ site.sections.research.title }}</a>
       <a class="btn" href="#contact">للتواصل</a>
     </div>
   </div>
@@ -34,43 +34,22 @@
   </div>
 </section>
 
-{# ── ٣. طريقتي في التحقيق ── #}
+{# ── ٣. أشتغل على ── #}
 <section class="block block-wide wrap">
-  <h2 class="block-title">{{ site.method.title }}</h2>
-  <div class="block-body">
-    <p class="lead">{{ site.method.lead }}</p>
-    <ol class="steps">
-      {% for s in site.method.steps %}
-      <li class="step">
-        <span class="step-num">{{ loop.index }}</span>
-        <h3>{{ s.title }}</h3>
-        <p>{{ s.text }}</p>
-      </li>
-      {% endfor %}
-    </ol>
-  </div>
-</section>
-
-{# ── ٤. رحلتي + أشتغل على ── #}
-<section class="block wrap">
-  <h2 class="block-title">رحلتي</h2>
-  <div class="block-body">
-    <ol class="journey">
-      {% for j in site.journey %}
-      <li>
-        <span class="journey-when">{{ j.when }}</span>
-        <div>
-          <h3>{{ j.title }}</h3>
-          {% if j.note %}<p>{{ j.note }}</p>{% endif %}
-        </div>
-      </li>
-      {% endfor %}
-    </ol>
-    <h3 class="sub-title">أشتغل على</h3>
-    <ul class="chips skills">
-      {% for s in site.skills %}<li>{{ s }}</li>{% endfor %}
-    </ul>
-  </div>
+  <h2 class="block-title">{{ site.tools_title }}</h2>
+  <ul class="tools">
+    {% for t in site.tools %}
+    <li class="tool">
+      <span class="tool-mark{% if t.mono|length > 2 %} long{% endif %}" aria-hidden="true">
+        {% if t.logo %}<img src="{{ root }}{{ t.logo }}" alt="">{% else %}{{ t.mono }}{% endif %}
+      </span>
+      <span class="tool-text">
+        <span class="tool-name" dir="ltr">{{ t.name }}</span>
+        <span class="tool-kind">{{ t.kind }}</span>
+      </span>
+    </li>
+    {% endfor %}
+  </ul>
 </section>
 
 {# ── ٥. M2M: الواجهة السابقة كما هي ── #}
@@ -93,6 +72,7 @@
     <header class="collection-head">
       <span class="collection-dot" aria-hidden="true"></span>
       <h2><a href="{{ root }}{{ key }}/">{{ sec.title }}</a></h2>
+      {% if sec.subtitle %}<span class="collection-sub">{{ sec.subtitle }}</span>{% endif %}
       {% if posts[key] %}<span class="count">{{ posts[key]|length|count_label }}</span>{% endif %}
     </header>
     <p class="collection-desc">{{ sec.description }}</p>
@@ -109,21 +89,6 @@
     {% endif %}
   </article>
   {% endfor %}
-</section>
-
-{# ── ٦. أشكال التعاون ── #}
-<section class="block wrap">
-  <h2 class="block-title">{{ site.collaborate.title }}</h2>
-  <div class="block-body">
-    <ul class="collab">
-      {% for c in site.collaborate['items'] %}
-      <li>
-        <h3><span class="collection-dot" aria-hidden="true"></span>{{ c.title }}</h3>
-        <p>{{ c.text }}</p>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
 </section>
 
 {# ── ٧. شاركني الطريق + التواصل ── #}
