@@ -2,7 +2,7 @@
 
 {% block main %}
 {# ── ١. الواجهة: أنت أولًا ── #}
-<section class="intro wrap">
+<section class="intro wrap{% if not site.photo %} no-photo{% endif %}">
   <div class="intro-text">
     <h1 class="intro-name">{{ site.author.name }}</h1>
     <p class="intro-role">{{ site.author.role }}</p>
@@ -13,16 +13,11 @@
       <a class="btn" href="#contact">للتواصل</a>
     </div>
   </div>
+  {% if site.photo %}
   <figure class="intro-photo">
-    {% if site.photo %}
     <img src="{{ root }}{{ site.photo }}" alt="{{ site.author.name }}" width="320" height="320">
-    {% else %}
-    <div class="photo-slot" role="img" aria-label="مكان الصورة الشخصية">
-      <svg aria-hidden="true" viewBox="8 7 84 84" width="56" height="56"><path d="M68 32 C68 21 60 14 50 14 C39 14 32 22 32 32 C32 42 42 45 50 50 L50 61" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><rect x="42" y="72" width="16" height="16" fill="var(--accent)"/></svg>
-      <span>صورتك هنا</span>
-    </div>
-    {% endif %}
   </figure>
+  {% endif %}
 </section>
 
 {# ── ٢. عني ── #}
