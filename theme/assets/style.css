@@ -193,30 +193,29 @@ img { max-width: 100%; height: auto; }
 /* M2M داخل الصفحة */
 .hero.m2m { border-top: 1px solid var(--line); padding-block: clamp(3rem, 7vw, 5rem) clamp(2rem, 4vw, 3rem); }
 
-/* أشتغل على: مربعات الأدوات */
-.tools { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+/* أشتغل على: لوحة واحدة مقسّمة بخطوط رفيعة، وكل أداة بشعارها في مربع أبيض */
+.tools {
+  list-style: none; margin: 1.5rem 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+}
 .tool {
-  display: flex; align-items: center; gap: .9rem; padding: 1rem 1.1rem;
-  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-  transition: border-color .2s ease;
+  display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.25rem;
+  background: var(--surface); transition: background .2s ease;
 }
-.tool:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
-.tool-mark {
-  position: relative; flex: none; display: grid; place-items: center;
-  width: 3rem; height: 3rem; border-radius: 10px; background: var(--bg); border: 1px solid var(--line);
-  color: var(--ink); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; direction: ltr;
+.tool:hover { background: var(--bg); }
+.tool-logo {
+  flex: none; display: grid; place-items: center; overflow: hidden;
+  width: 3.4rem; height: 3.4rem; border-radius: 13px; background: #fff;
+  box-shadow: 0 0 0 1px rgba(22, 36, 58, .08), 0 1px 2px rgba(22, 36, 58, .06);
+  color: #16243A; font-weight: 700; direction: ltr;
 }
-.tool-mark.long { font-size: .85rem; }
-.tool-mark::after { content: ""; position: absolute; bottom: 5px; right: 5px; width: 5px; height: 5px; background: var(--accent); }
-.tool-mark img { width: 70%; height: 70%; object-fit: contain; }
-.tool-mark:has(img)::after { display: none; }
+.tool-logo img { display: block; width: 86%; height: 86%; object-fit: contain; }
+.tool-logo.bleed img { width: 100%; height: 100%; object-fit: cover; }
 .tool-text { display: flex; flex-direction: column; min-width: 0; }
-.tool-name { font-weight: 700; font-size: 1rem; line-height: 1.4; text-align: right; }
+.tool-name { font-weight: 700; font-size: 1.02rem; line-height: 1.4; text-align: right; }
 .tool-kind { color: var(--ink-2); font-size: .85rem; line-height: 1.5; }
-
-/* الاسم الفرعي للقسمين */
-.collection-sub { color: var(--ink-2); font-size: .9rem; font-weight: 500; }
-.page-sub { margin: -.2em 0 .9em; color: var(--accent); font-size: 1.05rem; font-weight: 500; }
+[data-theme="dark"] .tool-logo { box-shadow: 0 1px 3px rgba(0, 0, 0, .35); }
 
 /* ── المجلدان: بطاقتان ── */
 .collections {
@@ -412,14 +411,33 @@ img { max-width: 100%; height: auto; }
   .intro { grid-template-columns: 1fr; }
   .intro-photo { order: -1; justify-self: start; width: 140px; }
   .block { grid-template-columns: 1fr; }
-  .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .post-list.compact li { flex-direction: column; gap: .1rem; }
   .filter { flex-wrap: wrap; }
   .filter input { flex-basis: 100%; }
 }
 
+/* الأدوات على الجوال: ثلاثة أعمدة، الشعار فوق والاسم تحته */
+@media (max-width: 560px) {
+  .tool { flex-direction: column; justify-content: center; gap: .6rem; padding: 1.1rem .4rem 1rem; text-align: center; }
+  .tool-logo { width: 3rem; height: 3rem; border-radius: 12px; }
+  .tool-name { font-size: .86rem; text-align: center; }
+  .tool-kind { display: none; }
+}
+
 /* الشاشات الضيقة جدًا: نخفي رابط "عني" عشان تبقى الترويسة في سطر واحد */
+.site-nav a { white-space: nowrap; }
 @media (max-width: 420px) {
   .site-nav .nav-about { display: none; }
+  .site-nav { gap: .85rem; font-size: .9rem; }
+  .header-tools { gap: .6rem; }
   .brand span { font-size: .95rem; }
 }
+
+/* أصغر الجوالات (320px) */
+@media (max-width: 350px) {
+  .site-header .wrap { padding-inline: 1rem; }
+  .brand span { font-size: .88rem; }
+  .site-nav { gap: .7rem; font-size: .84rem; }
+  .theme-toggle { width: 30px; height: 30px; }
+}
+

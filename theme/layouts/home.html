@@ -30,7 +30,6 @@
   <h2 class="block-title">عني</h2>
   <div class="block-body">
     {% for para in site.about %}<p class="lead">{{ para }}</p>{% endfor %}
-    <a class="btn" href="{{ (root ~ site.cv) if site.cv else '#' }}">السيرة الذاتية (PDF)</a>
   </div>
 </section>
 
@@ -40,8 +39,8 @@
   <ul class="tools">
     {% for t in site.tools %}
     <li class="tool">
-      <span class="tool-mark{% if t.mono|length > 2 %} long{% endif %}" aria-hidden="true">
-        {% if t.logo %}<img src="{{ root }}{{ t.logo }}" alt="">{% else %}{{ t.mono }}{% endif %}
+      <span class="tool-logo{% if t.bleed %} bleed{% endif %}" aria-hidden="true">
+        {% if t.logo %}<img src="{{ root }}{{ t.logo }}" alt="" width="160" height="160" loading="lazy">{% else %}{{ t.mono }}{% endif %}
       </span>
       <span class="tool-text">
         <span class="tool-name" dir="ltr">{{ t.name }}</span>
@@ -72,7 +71,6 @@
     <header class="collection-head">
       <span class="collection-dot" aria-hidden="true"></span>
       <h2><a href="{{ root }}{{ key }}/">{{ sec.title }}</a></h2>
-      {% if sec.subtitle %}<span class="collection-sub">{{ sec.subtitle }}</span>{% endif %}
       {% if posts[key] %}<span class="count">{{ posts[key]|length|count_label }}</span>{% endif %}
     </header>
     <p class="collection-desc">{{ sec.description }}</p>
