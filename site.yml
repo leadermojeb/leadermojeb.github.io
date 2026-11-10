@@ -73,22 +73,23 @@ footer_note: "المحتوى شخصي لأغراض التعلّم ولا يمث�
 # ============================================================
 #  الصفحة الشخصية (مسودة للمعاينة)
 # ============================================================
-hero_line: "أكتب بالعربي ما أتعلمه في الأمن السيبراني والتقنية، من سؤال إلى مفهوم."
+hero_line: "أكتبُ بلغةٍ نفهمُها ما أتعلمه في الأمن السيبراني والتقنية، من سؤال إلى مفهوم."
 photo: ""          # مسار الصورة، مثل content/media/me.jpg (فاضي = إطار مؤقت)
 
 about:
   - "لكل تقنية غاية صُنعت لأجلها، ولها أثر لا يظهر إلا حين تخرج إلى العالم. الشبكة التي وُجدت لتقرّب الناس صارت طريقًا إليهم، والنظام الذي بُني ليحفظ صار بابًا لمن يتربّص. وفي المسافة بين ما أُريد للتقنية وما صارت إليه، يولد الأمن السيبراني."
   - "في هذه المسافة أعمل. أقرأ الأثر قبل أن أحكم، وأسأل كيف حدث قبل أن أسأل بأي أداة، فالأدوات تتبدّل، والفهم وحده ما يبقى."
 
-# الأدوات: logo = مسار الشعار، bleed = الشعار يملأ المربع كاملًا
+# الأدوات: تظهر كشريط شعارات متحرك (الاسم لا يظهر، يُستخدم لقارئات الشاشة فقط)
+# square: true = الشعار مربع كامل بخلفيته (مثل Splunk)
 tools_title: "أشتغل على"
 tools:
-  - {name: "Cortex XSIAM", kind: "منصة عمليات أمنية", logo: "assets/tools/cortex.png"}
-  - {name: "Cortex XDR", kind: "كشف واستجابة", logo: "assets/tools/paloalto.png"}
-  - {name: "IBM QRadar", kind: "SIEM", logo: "assets/tools/qradar.png"}
-  - {name: "Splunk", kind: "SIEM وتحليل البيانات", logo: "assets/tools/splunk.png", bleed: true}
-  - {name: "Elastic", kind: "بحث وتحليل السجلات", logo: "assets/tools/elastic.png"}
-  - {name: "Cisco", kind: "الشبكات", logo: "assets/tools/cisco.png"}
-  - {name: "Notion", kind: "تنظيم المعرفة", logo: "assets/tools/notion.png"}
-  - {name: "ChatGPT", kind: "ذكاء اصطناعي", logo: "assets/tools/chatgpt.png"}
-  - {name: "Claude", kind: "ذكاء اصطناعي", logo: "assets/tools/claude.png"}
+  - {name: "Cortex XSIAM", logo: "assets/tools/cortex.png"}
+  - {name: "Cortex XDR", logo: "assets/tools/paloalto.png"}
+  - {name: "IBM QRadar", logo: "assets/tools/qradar.png"}
+  - {name: "Splunk", logo: "assets/tools/splunk.png", square: true}
+  - {name: "Elastic", logo: "assets/tools/elastic.png"}
+  - {name: "Cisco", logo: "assets/tools/cisco.png"}
+  - {name: "Notion", logo: "assets/tools/notion.png"}
+  - {name: "ChatGPT", logo: "assets/tools/chatgpt.png"}
+  - {name: "Claude", logo: "assets/tools/claude.png"}

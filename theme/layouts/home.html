@@ -36,19 +36,17 @@
 {# ── ٣. أشتغل على ── #}
 <section class="block block-wide wrap">
   <h2 class="block-title">{{ site.tools_title }}</h2>
-  <ul class="tools">
-    {% for t in site.tools %}
-    <li class="tool">
-      <span class="tool-logo{% if t.bleed %} bleed{% endif %}" aria-hidden="true">
-        {% if t.logo %}<img src="{{ root }}{{ t.logo }}" alt="" width="160" height="160" loading="lazy">{% else %}{{ t.mono }}{% endif %}
-      </span>
-      <span class="tool-text">
-        <span class="tool-name" dir="ltr">{{ t.name }}</span>
-        <span class="tool-kind">{{ t.kind }}</span>
-      </span>
-    </li>
-    {% endfor %}
-  </ul>
+  <div class="marquee">
+    <div class="marquee-track" dir="ltr">
+      {% for copy in range(4) %}
+      <ul class="marquee-group"{% if copy %} aria-hidden="true"{% endif %}>
+        {% for t in site.tools %}
+        <li class="logo-tile"><img{% if t.square %} class="square"{% endif %} src="{{ root }}{{ t.logo }}" alt="{{ '' if copy else t.name }}" width="160" height="160" decoding="async"></li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 
 {# ── ٥. M2M: الواجهة السابقة كما هي ── #}

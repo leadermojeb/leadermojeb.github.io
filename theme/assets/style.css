@@ -193,29 +193,35 @@ img { max-width: 100%; height: auto; }
 /* M2M داخل الصفحة */
 .hero.m2m { border-top: 1px solid var(--line); padding-block: clamp(3rem, 7vw, 5rem) clamp(2rem, 4vw, 3rem); }
 
-/* أشتغل على: لوحة واحدة مقسّمة بخطوط رفيعة، وكل أداة بشعارها في مربع أبيض */
-.tools {
-  list-style: none; margin: 1.5rem 0 0; padding: 0;
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px;
-  background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+/* أشتغل على: شريط شعارات متحرك */
+.marquee {
+  margin-top: 1.5rem; overflow: hidden; padding-block: .4rem; direction: ltr;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
 }
-.tool {
-  display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.25rem;
-  background: var(--surface); transition: background .2s ease;
+.marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-group { display: flex; gap: 1rem; padding: 0 1rem 0 0; margin: 0; list-style: none; }
+@keyframes marquee { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.logo-tile {
+  flex: none; display: grid; place-items: center;
+  width: 5rem; height: 5rem; border-radius: 20px; background: #fff;
+  box-shadow: 0 0 0 1px rgba(22, 36, 58, .07), 0 1px 3px rgba(22, 36, 58, .06);
 }
-.tool:hover { background: var(--bg); }
-.tool-logo {
-  flex: none; display: grid; place-items: center; overflow: hidden;
-  width: 3.4rem; height: 3.4rem; border-radius: 13px; background: #fff;
-  box-shadow: 0 0 0 1px rgba(22, 36, 58, .08), 0 1px 2px rgba(22, 36, 58, .06);
-  color: #16243A; font-weight: 700; direction: ltr;
+.logo-tile img { display: block; width: 74%; height: 74%; object-fit: contain; }
+.logo-tile img.square { width: 58%; height: 58%; border-radius: 12px; }
+[data-theme="dark"] .logo-tile { background: #F3F5F8; box-shadow: 0 1px 3px rgba(0, 0, 0, .4); }
+@media (max-width: 560px) {
+  .logo-tile { width: 4rem; height: 4rem; border-radius: 16px; }
+  .logo-tile img.square { border-radius: 9px; }
+  .marquee-group { gap: .75rem; padding-right: .75rem; }
 }
-.tool-logo img { display: block; width: 86%; height: 86%; object-fit: contain; }
-.tool-logo.bleed img { width: 100%; height: 100%; object-fit: cover; }
-.tool-text { display: flex; flex-direction: column; min-width: 0; }
-.tool-name { font-weight: 700; font-size: 1.02rem; line-height: 1.4; text-align: right; }
-.tool-kind { color: var(--ink-2); font-size: .85rem; line-height: 1.5; }
-[data-theme="dark"] .tool-logo { box-shadow: 0 1px 3px rgba(0, 0, 0, .35); }
+@media (prefers-reduced-motion: reduce) {
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .marquee-track { animation: none; width: auto; display: block; }
+  .marquee-group { flex-wrap: wrap; justify-content: flex-start; padding: 0; direction: rtl; }
+  .marquee-group[aria-hidden] { display: none; }
+}
 
 /* ── المجلدان: بطاقتان ── */
 .collections {
@@ -414,14 +420,6 @@ img { max-width: 100%; height: auto; }
   .post-list.compact li { flex-direction: column; gap: .1rem; }
   .filter { flex-wrap: wrap; }
   .filter input { flex-basis: 100%; }
-}
-
-/* الأدوات على الجوال: ثلاثة أعمدة، الشعار فوق والاسم تحته */
-@media (max-width: 560px) {
-  .tool { flex-direction: column; justify-content: center; gap: .6rem; padding: 1.1rem .4rem 1rem; text-align: center; }
-  .tool-logo { width: 3rem; height: 3rem; border-radius: 12px; }
-  .tool-name { font-size: .86rem; text-align: center; }
-  .tool-kind { display: none; }
 }
 
 /* الشاشات الضيقة جدًا: نخفي رابط "عني" عشان تبقى الترويسة في سطر واحد */
